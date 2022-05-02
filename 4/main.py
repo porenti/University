@@ -5,16 +5,20 @@ window = tk.Tk()
 
 entry_input = tk.Entry(
 width=25)
+entry_input.insert(0, "Текст для шифрования")
 entry_input.pack()
 modul_input = tk.Entry(
 width=25)
+modul_input.insert(0, "Модуль")
 modul_input.pack()
 entry_output = tk.Entry(
 width=25)
+entry_output.insert(0, "Зашифрованный текст")
 entry_output.pack()
 
 def push():
-    entry_output.delete(0)
+    _l = len(entry_output.get())
+    entry_output.delete(0,_l)
     text = entry_input.get()
     _mod = modul_input.get() #нельзя больше количества букв
 
