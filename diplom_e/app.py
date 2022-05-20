@@ -106,8 +106,8 @@ def create_book(client,name_book,author,year,izdatel,isbn):
 
 @app.route('/check_book')  # Данные о книгах, которые взяты пользователями
 def get_books():
-    last_name = request.args.get("last_name")
-    _json = json.dumps(search_one_people_books(client, last_name),
+    author = request.args.get("author")
+    _json = json.dumps(search_one_people_books(client, author),
                                         sort_keys=False,
                                         indent=4,
                                         ensure_ascii=False)
@@ -120,6 +120,7 @@ def get_users(): #    - Данные о пользователях
                                         sort_keys=False,
                                         indent=4,
                                         ensure_ascii=False)
+    request.headers["Content-Type"] ="application/json"
     return _json
 
 @app.route('/new_user')  #client,family,name,otchestvo,address,telephone,group_a,group_e
@@ -153,4 +154,5 @@ def new_boks(): #    - Новый книга
 
 
 if __name__ == '__main__':
+    #request.headers['Content-Type'] = "application/json"
     app.run()

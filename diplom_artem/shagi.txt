@@ -1,0 +1,34 @@
+python -m venv venv - создали вирт. окружение
+# .\venv\Scripts\activate
+
+deactivate - выйти
+
+django-admin startproject learning
+cd ->
+python manage.py runserver {порт}
+
+#каждое приложения - отдельная часть функциональности сайта
+python manage.py startapp main
+приложения прописываются в settings
+
+python manage.py makemigrations {app}
+python manage.py migrate
+
+
+python manage.py createsuperuser
+artem
+hyi@gmail.com
+sosi #password
+
+
+class people_to_course(models.Model):
+    people_id = models.IntegerField()
+    course_id = models.IntegerField()
+
+class people_to_answer(models.Model):
+    people_id = models.IntegerField()
+    answer_id = models.IntegerField()
+
+class answer_to_course(models.Model):
+    answer_id = models.IntegerField()
+    course_id = models.IntegerField()

@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<ul>
+    {% for p in list_c %}
+    <li>
+        <h2>{{ p.course_name }}</h2>
+        <p>{{ p.author }}</p>
+        <p><a href="{% url 'course_info' p.pk %}">Кнопка пройти</a></p>
+        <hr>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

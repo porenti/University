@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Ученик</title>
+    <link type="text/css" href="{% static 'main/css/styles.css' %}"/>
+</head>
+
+<body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
+    <nav id="mainNav">
+        <div><a href="{% url 'home' %}"><span>Ученик</span></a>
+            <div id="navcol-1">
+                <ul>
+                    <li><a href="{% url 'home' %}">Главная</a></li>
+                    <li></li>
+                    <li><a href="{% url 'courses' %}">Курсы</a></li>
+                    <li></li>
+                    <li><a href="{% url 'about' %}">О нас</a></li>
+                </ul><a role="button" href="signup.html">Войти</a>
+            </div>
+        </div>
+    </nav>
+    <header></header>
+    <section></section>
+    <footer></footer>
+</body>
+{% block content %}
+{% endblock %}
+</html>
