@@ -19,7 +19,7 @@ except Exception as E:
     print('error connection')
 
 
-def search_one_people_books(client,family):
+def search_one_people_books(client,family): #ищет по автору книги
     return_dict = {}
     found = client.search('"A={}$"'.format(family))
     for item in found:
@@ -31,7 +31,7 @@ def search_one_people_books(client,family):
             _jitem = str(jitem).split("\n")
             name = "{} {} {}".format(_f_name,_s_name,_t_name)
             _list_books = []
-            for zitem in _jitem: #перебор всех записей по человеку
+            for zitem in _jitem: #перебор всех книжек по человеку
                 if zitem.startswith("40"):  #перебор всех взятых книг по человеку
                     _zitem = zitem.split("^")
                     _book = {"book_name": "None", "date_take": "None", "date_return": "None"}
@@ -106,8 +106,8 @@ def create_book(client,name_book,author,year,izdatel,isbn):
 
 @app.route('/check_book')  # Данные о книгах, которые взяты пользователями
 def get_books():
-    author = request.args.get("author")
-    _json = json.dumps(search_one_people_books(client, author),
+    last_name = request.args.get("last_name")
+    _json = json.dumps(search_one_people_books(client, last_name),
                                         sort_keys=False,
                                         indent=4,
                                         ensure_ascii=False)
@@ -120,7 +120,7 @@ def get_users(): #    - Данные о пользователях
                                         sort_keys=False,
                                         indent=4,
                                         ensure_ascii=False)
-    request.headers["Content-Type"] ="application/json"
+
     return _json
 
 @app.route('/new_user')  #client,family,name,otchestvo,address,telephone,group_a,group_e
