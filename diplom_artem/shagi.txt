@@ -32,3 +32,11 @@ class people_to_answer(models.Model):
 class answer_to_course(models.Model):
     answer_id = models.IntegerField()
     course_id = models.IntegerField()
+
+
+  #ДОБАВИТЬ ТИП ВОПРОСА
+  #страничка для вопроса
+python manage.py shell
+
+
+python manage.py makemigrations main

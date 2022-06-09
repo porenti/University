@@ -16,27 +16,38 @@ def course_list(request):
     return render(request, "main/course_list.html", {"list_c": courses_list})
 
 def about(request):
-    return render(request, 'main/about.html')
+    return HttpResponse("Ты пидорас")
+    #return render(request, 'main/about.html')
+
+# def quest_return(request, quest_id):
+#     #передаем 7 - значное число, первые 3 - номер курса, 1 - номер шаблона, 3 - номер вопроса
+#     _str = str(quest_id)
+#     if len(_str) != 7:
+#         raise Http404()
+#         #return HttpResponse("Ты долбоеб")
+#     else:
+#         context = {
+#             "Title": "Вопрос",
+#             "id_course": _str[0:3],
+#             "number_shablon": _str[3],
+#             "id_answer": _str[4:7]
+#         }
+#         return render(request, 'main/test.html', context = context)
 
 def quest_return(request, quest_id):
-    #передаем 7 - значное число, первые 3 - номер курса, 1 - номер шаблона, 3 - номер вопроса
-    _str = str(quest_id)
-    if len(_str) != 7:
-        raise Http404()
-        #return HttpResponse("Ты долбоеб")
-    else:
-        context = {
-            "Title": "Вопрос",
-            "id_course": _str[0:3],
-            "number_shablon": _str[3],
-            "id_answer": _str[4:7]
-        }
-        return render(request, 'main/test.html', context = context)
+    quest = answer.objects.filter(pk = quest_id)
+    for i in quest:
+        context = {"Наименование вопроса": i.name_answer, "Вопрос": i.answer}
+    print(context)
+    return HttpResponse(context.values())
+
 
 def course_info(request, course_id):
-    if len(str(course_id)) != 3:
-        raise Http404()
-    return HttpResponse(course_id)
+    quest_list = answer.objects.filter(course = course_id)
+    context = []
+    for i in quest_list:
+        context.append({"Наименование вопроса": i.name_answer, "Вопрос": i.answer})
+    return render(request, "main/course_info.html", {"list_c": quest_list})
 
 def add_course(request):
     if request.method == "POST":

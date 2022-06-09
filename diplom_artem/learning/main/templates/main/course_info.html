@@ -1,5 +1,14 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-
+<ul>
+    {% for p in list_c %}
+    <li>
+        <h2>{{ p.name_answer }}</h2>
+        <p>{{ p.answer }}</p>
+        <p><a href="{% url 'quest' p.pk %}">Кнопка пройти</a></p>
+        <hr>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

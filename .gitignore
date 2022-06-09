@@ -3,3 +3,5 @@ irbis_cgi_bin/
 irbis_htdocs/
 irbis64/
 closed.py
+__pycache__/
+venv/

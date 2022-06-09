@@ -40,10 +40,7 @@ class answer(models.Model):
     name_answer = models.CharField(max_length=255, verbose_name="Название задания")
     answer = models.TextField(verbose_name="Текст задания")
     key = models.CharField(max_length=255, verbose_name="Ответ")
-    course = models.ManyToManyField("main.courses",
-                                     blank=True,
-                                     symmetrical=False,
-                                     related_name="answers_for_courses")
+    course = models.ForeignKey("main.courses", on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Задания"
