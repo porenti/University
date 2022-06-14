@@ -67,11 +67,14 @@ def add_question(request):
         form = addAnswer(request.POST)
         if form.is_valid():
             z = courses.objects.filter(course_name = form.cleaned_data.get('course'))
+            print(z)
             try:
                 a = answer.objects.create(name_answer=form.cleaned_data["name_answer"], answer=form.cleaned_data["answer"], key=form.cleaned_data["key"])
+                print(a)
                 a.course.set(z)
             except:
                 form.add_error(None, 'Ошибка добавления задания')
+                print(e)
     else:
         form = addAnswer()
     return render(request, 'main/add_question.html', {'form': form})

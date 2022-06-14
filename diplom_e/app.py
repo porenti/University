@@ -3,6 +3,9 @@ import irbis
 import json
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
+
+a = ['а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ъ','ы','ь','э','ю','я','None']
 
 try:
     client = irbis.Connection()
@@ -71,7 +74,7 @@ def search_one_people(client,family):
             _group = jitem.fm(90, "a")
             _group_number = jitem.fm(90, "e")
             name = "{} {} {}".format(_f_name,_s_name,_t_name)
-        return_dict[name] = [_adress,_telephone,_group,_group_number]
+        return_dict[name] = {'Адресс': _adress,'Телефон': _telephone,"Группа": str(_group)+str(_group_number)}
     return return_dict
 
 def create_user(client,family,name,otchestvo,address,telephone,group_a,group_e):
@@ -103,6 +106,31 @@ def create_book(client,name_book,author,year,izdatel,isbn):
     record.add(10, "^a{}".format(isbn))
     client.write_record(record)
 
+def check_all_books(client):
+    _all_books_create_dict = {}
+    for i in a:
+        _all_books_create_dict[i] = []
+
+    found = client.search('"A=$"')
+    _return = {"books": []}
+    for item in found:
+        records = client.read_records(item)
+        for it in records:
+            _trash_dict = {str(it.fm(700,'a'))+" "+str(it.fm(700,'b')): {"Название": str(it.fm(200,'a')),
+                                                                            "Год издания": str(it.fm(210,'d')),
+                                                                            "Издатель": str(it.fm(210,'c'))}}
+            _t = str(it.fm(700,'a')).lower()[0]
+            if _t in a:
+                _all_books_create_dict[_t].append(_trash_dict)
+
+    return _all_books_create_dict
+
+
+@app.route('/all')  # Данные о книгах, которые взяты пользователями
+def get_all_books():
+    a = check_all_books(client_b)
+
+    return a
 
 @app.route('/check_book')  # Данные о книгах, которые взяты пользователями
 def get_books():
