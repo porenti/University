@@ -107,3 +107,22 @@ def getall(request,st):
 
     _r = json.dumps(wq, ensure_ascii=False)
     return HttpResponse(_r)
+
+def getpk(request,x):
+    try:
+        wq_one = WebQuest.objects.filter(pk = x)[0]
+        wq = []
+        wq.append({"Название": wq_one.name, 'pk': wq_one.pk, "Роли": []})
+        for item in wq:
+            rols = Role.objects.filter(webquest = item['pk'])
+            for jitem in rols:
+                _q = []
+                qp = Quest_pool.objects.filter(role_id = jitem.role_id)
+                for kitem in qp:
+                    _q.append({"Пул вопросов": kitem.name, "Путь": kitem.slug})
+                item["Роли"].append({'Роль': jitem.name, "id": jitem.role_id, "Пулы": _q})
+
+        _r = json.dumps(wq[0], ensure_ascii=False)
+        return HttpResponse(_r)
+    except:
+        return HttpResponse("Идентификатор не найден")
