@@ -14,10 +14,13 @@ from random import randint as random
 slg_r = "abcdefghijklmnopqrstuvwxyz0123456789"
 
 def index(request):
-    return HttpResponse("Home")
+    return render(request, "index.html")
 
 @method_decorator(csrf_exempt, name='dispatch')
 class quest(View):
+    def get(self, request):
+        return render(request, "create web course.html")
+
     def post(self, request):
         _r = {}
         #post_body = json.loads(request.body)

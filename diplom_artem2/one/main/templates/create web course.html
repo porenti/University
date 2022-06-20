@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Артем</title>
+    <link text = "text/css" href="{% static 'main/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat+Alternates&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+</head>
+
+<body style="font-family: 'Montserrat Alternates', sans-serif;">
+    <div class="container" style="margin: 30px;margin-right: auto;margin-left: auto;">
+        <div style="margin: 15px;padding: 50px;background: var(--bs-gray-300);border-radius: 15px;">
+            <h1 style="font-family: 'Montserrat Alternates', sans-serif;">Создаем веб-квест</h1>
+            <h5 style="font-family: 'Montserrat Alternates', sans-serif;">Вы создаете веб-квест, и это замечательно! Если у вас есть затруднения, то вы всегда можете обратиться к&nbsp;<a href="#">инструкции</a>.</h5>
+            <form>
+                <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
+                    <div class="col"><label class="form-label">Название квеста:</label><input class="form-control" type="text" placeholder="Введите название квеста"></div>
+                </div>
+                <hr>
+                <h2 style="font-family: 'Montserrat Alternates', sans-serif;">Шаг 1. Создаем роли</h2>
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="list-group" id="group-of-roles"></ul>
+                    </div>
+                    <div class="col-12" style="margin-top: 15px;">
+                        <div class="list-group" style="margin: 15px;border-radius: 115px;"><a class="list-group-item list-group-item-action list-group-item-primary text-center" id="link-add-roles" style="cursor:pointer;"><span>Добавить роль...</span></a></div>
+                    </div>
+                </div>
+                <hr>
+                <h2 style="font-family: 'Montserrat Alternates', sans-serif;">Шаг 2. Создаем пулы вопросов</h2>
+                <div class="row" id="block-of-pools" style="cursor: pointer;"></div>
+                <div class="row" style="cursor: pointer;">
+                    <div class="col-12">
+                        <div class="list-group" style="margin: 15px;border-radius: 115px;"><a class="list-group-item list-group-item-action list-group-item-primary text-center" id="link-add-pool" style="cursor: pointer;"><span>Добавить пул вопросов</span></a></div>
+                    </div>
+                </div>
+                <hr>
+                <h2 style="font-family: 'Montserrat Alternates', sans-serif;">Шаг 3. Создаем вопросы в пулах</h2>
+                <div class="row" id="div-of-questions">
+                    <div class="col-12">
+                        <div style="padding: 15px;margin: 15px;background: var(--bs-light);border-radius: 15px;">
+                            <div class="row">
+                                <div class="col-12">
+                                    <hr>
+                                </div>
+                                <div class="col-12" id="block-of-questions" style="margin: 15px 0;"></div>
+                                <div class="col-12">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col" style="margin: 15px 0;">
+                                    <div class="list-group" style="margin: 15px;border-radius: 15px;"><a class="list-group-item list-group-item-action list-group-item-primary text-center" id="link-create-question" style="cursor: pointer;"><span>Добавить вопрос</span></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </form><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalConfirm">Сохранить</button>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" data-bss-hover-animate="tada" id="modalConfirm">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="font-family: 'Montserrat Alternates', sans-serif;">Подтвердите действие</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Вы уверены, что вы хотите сохранить веб-квест? Если да, то смело нажимайте "сохранить"!</p>
+                </div>
+                <div class="modal-footer"><button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close" onclick="sendToServer();" type="button">Сохранить</button></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'main/js/bs-init.js' %}"></script>
+    <script src="{% static 'main/js/web-course-create.js' %}"></script>
+</body>
+
+</html>
