@@ -2,8 +2,8 @@
 // Объявляем объект-ссылку на DOM-объекты (Document Object Model (Объектаная модель документа)) link_add_roles, link_add_pool, link_add_question.
 
 let roles = {},
-    pools = [],
-    questions = [],
+    pools = {},
+    questions = {},
     link_add_roles = document.getElementById('link-add-roles'),
     link_add_pool = document.getElementById('link-add-pool'),
     link_add_question = document.getElementById('link-create-question');
@@ -215,8 +215,11 @@ function editQuestion(_t, _id, _type) {
 async function sendToServer() {
     let _headers = new Headers(),
         _raw = JSON.stringify({
-
-        })
+            name: document.getElementById('name-of-quest').value,
+            roles: roles,
+            pools: pools,
+            questions: questions
+        });
     _headers.append('Content-Type', 'application/json');
     let _reqOptions = {
         method: 'POST',
@@ -225,7 +228,7 @@ async function sendToServer() {
         redirect: 'follow'
     };
 
-    fetch('http/127.0.0.1:8000/quest/', _reqOptions)
+    fetch('/quest/', _reqOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .then(error => console.log('error', error));
