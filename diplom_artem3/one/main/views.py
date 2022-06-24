@@ -15,19 +15,18 @@ slg_r = "abcdefghijklmnopqrstuvwxyz0123456789"
 
 
 def index(request):
-    return HttpResponse("main_page")
-    #return render(request, "index.html")
+    return render(request, "index.html")
 
 def webquest(request, st):
     a = Quest.objects.filter(slag = st)
-    return HttpResponse(a[0].text)
+    return render(request, "view-quest.html")
+    #return HttpResponse(a[0].text)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class quest(View):
     def get(self, request):
-        return HttpResponse("create quest")
-        #return render(request, "create web course.html")
+        return render(request, "create-web-quest.html")
 
     def post(self, request):
         dt = request.body.decode('utf-8')

@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat+Alternates&amp;display=swap">
+    <link rel="stylesheet" href="{% static 'main/css/Navbar-With-Button.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/styles.css' %}">
+</head>
+
+<body style="width: 100vw;height: 100vh;font-family: 'Montserrat Alternates', sans-serif;">
+    <div id="modal-check" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Проверка ваших ответов!</h4>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-check-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="overflow-fix" class="container d-flex justify-content-center align-items-center" style="width: 100%;height: 100%;">
+        <div class="row" style="width: 85%;height: 90%;">
+            <div class="col">
+                <div id="quest-card" style="margin: 15px;padding: 15px;background: var(--bs-gray-300);border-radius: 10px;">
+                    <h1 id="quest-name-heading" style="text-align: center;"></h1>
+                    <div id="start-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h1>🎊</h1>
+                            <h1>Вы готовы начать?</h1>
+                            <h1>🎊</h1>
+                        </div>
+                        <h4>Прохождение веб-квеста требует от вас внимательности и отваги! Мы в вас верим! Если вы готовы, то можете начинать...</h4>
+                        <h4>Ах, да! Вот небольшое описание квеста:</h4>
+                        <div id="quest-description"></div>
+                        <button class="btn btn-primary btn-lg" id="start-quest-button" type="button">Начинаем 🚩!</button>
+                    </div>
+                    <div id="quest-landing" style="display: none;">
+                        <div id="questions-block"></div>
+                        <div style="margin-top: 10px;">
+                            <div class="btn-group" role="group" style="margin: 5px 0;">
+                                <button class="btn btn-primary" onclick="moveQuestion('forward');" type="button">⏪ Назад</button>
+                                <button class="btn btn-primary" onclick="moveQuestion('back');" type="button">Вперед ⏩</button>
+                            </div>
+                            <ul class="list-group list-group-horizontal d-flex flex-wrap" id="quest-numbers">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="word-block">
+        <h4>Зашифрованное слово!</h4>
+        <ul class="list-group list-group-horizontal" id="quest-word"></ul>
+    </div>
+    <div class="d-flex justify-content-center align-items-center" id="show-word-block">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-up" id="show-word-block-icon" style="font-size: 30px;color: rgb(0,0,0);">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"></path>
+        </svg></div>
+    <div id="alert-block">
+        <!-- <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <span>
+                <strong>Alert</strong>
+                text.
+            </span>
+        </div> -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'main/js/game.js' %}"></script>
+</body>
+
+</html>
