@@ -17,10 +17,12 @@ slg_r = "abcdefghijklmnopqrstuvwxyz0123456789"
 def index(request):
     return render(request, "index.html")
 
+def game(request):
+    return render(request, "view-quest.html")
+
 def webquest(request, st):
     a = Quest.objects.filter(slag = st)
-    return render(request, "view-quest.html")
-    #return HttpResponse(a[0].text)
+    return HttpResponse(a[0].text)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -35,11 +37,8 @@ class quest(View):
         while len(_st) != 20:
             _st += slg_r[random(0,len(slg_r)-1)]
 
-        print(dt.split('"'))
-        print()
-
         d = {"text": dt, "slag": _st, "name": dt.split('"')[3]}
-        print(d)
+
         Quest.objects.create(**d)
         return HttpResponse("return quest")
 

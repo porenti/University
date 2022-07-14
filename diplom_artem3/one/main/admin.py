@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import *
+
+class QuestAdmin(admin.ModelAdmin):
+    list_dispay = ('id', 'slag', 'name')
+    search_fields = ('name',)
+
+admin.site.register(Quest, QuestAdmin)
